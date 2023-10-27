@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ctfs on がーとのブログ</title><link>http://gaato.net/ctf/</link><description>Recent content in Ctfs on がーとのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sun, 04 Jun 2023 17:43:20 +0900</lastBuildDate><atom:link href="http://gaato.net/ctf/index.xml" rel="self" type="application/rss+xml"/><item><title>SECCON Beginners CTF 2023 Writeup</title><link>http://gaato.net/ctf/ctf4b2023/</link><pubDate>Sun, 04 Jun 2023 17:43:20 +0900</pubDate><guid>http://gaato.net/ctf/ctf4b2023/</guid><description>こんにちは，がーとです．久しぶり（去年のこの大会ぶり？）に CTF に参加しました．
+自分が解けた Web の３問の Writeup を書きます．
+Forbidden author: Tsubasa begginer 431 Solved You don&amp;rsquo;t have permission to access /flag on this server.
+https://forbidden.beginners.seccon.games
+Forbidden.tar.gz 018c1361937a789b327181c9a46ec574906c360c
+app/index.js を見ると
+if (req.path.includes(&amp;#39;/flag&amp;#39;)) { return res.send(403, &amp;#39;Forbidden :(&amp;#39;); } とあるので /flag と全く同じ文字列を含まず /flag と等価なパスにアクセスすれば良い．
+ということで /FLAG とアクセスするとフラグゲット． （頭が堅いのでこの問題一番時間かかりました）
+aiwaf author: Satoki easy 256 Solved AI-WAFを超えてゆけ！！ ※AI-WAFは気分屋なのでハックできたりできなかったりします。
+https://aiwaf.beginners.seccon.games
+aiwaf.</description></item><item><title>SECCON Beginners CTF 2022 Writeup</title><link>http://gaato.net/ctf/ctf4b2022/</link><pubDate>Sun, 05 Jun 2022 00:00:00 +0900</pubDate><guid>http://gaato.net/ctf/ctf4b2022/</guid><description>こんにちは、がーとです。今回忙しかったのですが片手間で SECCON Beginners CTF 2022 にチーム Hacklava として参加し、1 問だけ解いたので解法をメモっておきます。
+textex 実は私も Web 上で LaTeX をコンパイルするサービスを運用していて、この脆弱性も経験していたので正直余裕でした。
+Dockerfile とディレクトリ構造を見て ./flag を LaTeX の中から読み込めばいいということが分かったのでまず思いついたのが \input です。ということでまず思いつくのは
+\documentclass{article} \begin{document} \input{flag} \end{document} ですが app.py を読んでみると flag を空文字列に置換しているのでこれは ERROR です。そこで \def を使って
+\documentclass{article} \def\hoge{g} \begin{document} \input{fla\hoge} \end{document} としてみても ERROR。 \input は読み込んだ文字列をそのまま LaTeX のコードとして解釈するのですが、flag に _ （アンダースコア）が含まれているとテキストモードではエラーが出るのでそのエラーかと思いました。 そこで数式モードに入れてやれば _ の後の文字が下付き文字として解釈されるので出るのではと思い、
+\documentclass{article} \def\hoge{g} \begin{document} $$\input{fla\hoge}$$ \end{document} としてみると
+が出てきて LaTeX では {} はブロックとして解釈され消えるのと、 _ の後の文字が下付き文字になることを考慮すると flag は ctf4b{15_73x_pr0n0unc3d_ch0u?} ということが分かります。</description></item><item><title>CPCTF2021 OSINT Writeup</title><link>http://gaato.net/ctf/cpctf2021/</link><pubDate>Tue, 27 Apr 2021 00:00:00 +0900</pubDate><guid>http://gaato.net/ctf/cpctf2021/</guid><description>こんにちは、がーとです。先日 CPCTF2021 に参加しました。OSINT 問題が楽しかったので今回初めて CTF の Writeup をやってみたいと思います。初めてなのでお手柔らかにお願いします。
+今回私は 1,831.31 点を獲得し、44 位でした。CTF 初心者の私は大体 OSINT で点数を稼ぎました。 Boundless Internet Ocean xxpoxxは画面内に並ぶ無数の情報の中にフラグを隠しています。
+見つけ出してください。
+リンクに飛ぶと xxpoxx さんの書かれた記事が並んでいます。FLAG とかで検索をかけてみましたがヒットせず。ここでさっきの所に戻って上の方に注目すると Twitter のリンクを発見。このアカウントに FLAG が隠されているのかと思ったので from:cskd8 flag と検索をかけるとフラグゲット。from: などの Twitter 検索のキーワードがわからない場合は高度な検索を使ってみるといいと思います。
+Secret Account ロリ子のtwitterアカウントは@trapyojoですが、最近裏アカウントを作ったようです。この問題のフラグは、FLAG{そのアカウントのid}です。
+リンクに飛ぶと bio に &amp;ldquo;ほんみょうは「あずま のりこ」っていうんだよ！&amp;rdquo; と書かれているので Twitter で あずまのりこ とアカウント検索をかけてみると bio に分かりやすく &amp;ldquo;裏垢&amp;rdquo; とだけ書かれたアカウントが出てきました。親切ですね！
+Dig The Account Noelは CPCTF の運営に関わっており、この問題のフラグを管理しています。しかし、彼はセキュリティ意識が高いので、ツイートを非公開にしています。
+フラグを見つけ出してください。
+鍵垢なので当然そのアカウントのツイートは見れませんが、このアカウントに関連するツイートを探すにはどうしたらいいかを考えると、このアカウントに対してのリプライを検索すればいいのではないかという発想に至ります。これも高度な検索を使うか、to:_____noel____ と検索をかけてみます。そうするとフラグがそのまま載っているツイートが出てきます。
+Student ID Card 東都工業大学情報理工学院に 2021 年度学部生として入学したあなたは、大切な学生証をどこかに落としてしまいました。それに気づいたあなたはあちこちを探し回ったところ、学生証は無事見つかりましたが、悪意ある者により学籍番号の大部分が黒く塗りつぶされてしまっていました。あなたの記憶力はニワトリ並なので、これでは自分の学籍番号がわかりません。学生証に書かれている学籍番号は、塗りつぶされている部分を?</description></item></channel></rss>
