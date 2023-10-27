@@ -1,4 +1,4 @@
-baseURL = "http://gaato.net/"
+baseURL = "http://blog.gaato.net/"
 languageCode = "ja"
 title = "がーとのブログ"
 theme = "m10c"
