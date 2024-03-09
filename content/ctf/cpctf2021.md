@@ -43,7 +43,7 @@ Twitter で `東都工業大学 学籍番号` と検索をかけてみると最�
 
 > この写真が撮られた場所はどこですか？
 > この問題のフラグは`FLAG{この写真が撮られた公園の電話番号のハイフン無し}`です。
-> ![Where Is That Celebrity?](/blog/img/cpctf2021/where-is-that-celebrity.jpg)
+> ![Where Is That Celebrity?](/img/cpctf2021/where-is-that-celebrity.jpg)
 
 とりあえず EXIF を確認しましたが何もないのでこの写真の中に検索できそうな物を探します。すると奥に艦艇があることに気が付きます。そこで `艦艇 公園` と Google で検索すると "世界三大記念艦「三笠」" というのが沢山出てきました。それらを見ているとどうやら三笠公園という公園があるらしい事を知ります。その電話番号を探して終了。
 
